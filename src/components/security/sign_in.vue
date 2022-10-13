@@ -18,16 +18,14 @@
       <div class="form">
         <div class="inform">
           <span class="p-float-label" style="width: 100%">
-            <InputText id="username" type="text" v-model="value2" style="width: 100%;" />
+            <InputText id="username" type="text" v-model="form.email" style="width: 100%;" />
             <label for="username">Email</label>
           </span>
             <span class="p-float-label" style="width: 100%;">
-              <InputText id="username" type="text" v-model="value2" style="width: 100%;"/>
+              <InputText id="username" type="text" v-model="form.password" style="width: 100%;"/>
               <label for="username">Password</label>
           </span>
-          <router-link to="/home" style="text-decoration: none; margin: 0 15px; width: 100%">
-            <Button label="Sign In" style="width: 100%; border-radius: 8px; background: #4461f2" />
-          </router-link>
+          <Button @click="login" label="Sign In" style="width: 100%; border-radius: 8px; background: #4461f2" />
           <p>Or Continue with</p>
           <div class="social_red">
             <Button icon="pi pi-facebook" class="p-button-rounded facebook" />
@@ -41,8 +39,31 @@
 </template>
 
 <script>
+import {Authentication} from "@/Services/Authentication";
+
 export default {
-  name: "sign_in"
+  name: "sign_in",
+  data(){
+    return{
+      authenticationService: null,
+      form:{
+        email: '',
+        password: ''
+      }
+    }
+  },
+  created() {
+
+  },
+  methods:{
+    login(){
+      this.authenticationService = new Authentication();
+      console.log(this.form)
+      this.authenticationService.logInUser(this.form).then(() =>{
+        console.log("hola")
+      })
+    }
+  }
 }
 </script>
 
