@@ -2,6 +2,7 @@ import {createRouter, createWebHistory} from "vue-router";
 import sign_in from "@/components/security/sign_in";
 import sign_up from "@/components/security/sign_up";
 import home from "@/components/MainView/home";
+import conversion_rate from "@/components/MainView/Conversion_rate";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -24,6 +25,10 @@ const router = createRouter({
             path: "/home",
             name: "home",
             component: home
+        },{
+            path: "/conversionRate",
+            name: "conversionRate",
+            component: conversion_rate
         }
     ]
 })

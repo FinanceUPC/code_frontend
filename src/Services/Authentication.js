@@ -1,10 +1,11 @@
-import httpCommon from "../core/Services/http-common";
+import http from '../core/Services/http'
 
 export class Authentication{
     loginUser(data){
-        return httpCommon.get(`/users?email=${data.email}`)
+        console.log(data)
+        return http.get(`/users?username=${data}`)
     }
     logInUser(data){
-        return httpCommon.post("/api/v1/users/sign-in/", data)
+        return http.post("/users/sign-in", data)
     }
 }
