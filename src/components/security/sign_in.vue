@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="signIn">
     <div style="width: 100%; margin: 20px 0; position: fixed">
       <div style="justify-content: center; align-items: center; display: flex">
         <button class="principal p-button-rounded button_navigation">Sign In</button>
@@ -18,11 +18,11 @@
       <div class="form">
         <div class="inform">
           <span class="p-float-label" style="width: 100%">
-            <InputText id="username" type="text" v-model="form.email" style="width: 100%;" />
+            <InputText id="username" type="text" v-model="form.username" style="width: 100%;" />
             <label for="username">Email</label>
           </span>
             <span class="p-float-label" style="width: 100%;">
-              <InputText id="username" type="text" v-model="form.password" style="width: 100%;"/>
+              <InputText id="password" type="password" v-model="form.password" style="width: 100%;"/>
               <label for="username">Password</label>
           </span>
           <Button @click="login" label="Sign In" style="width: 100%; border-radius: 8px; background: #4461f2" />
@@ -47,8 +47,8 @@ export default {
     return{
       authenticationService: null,
       form:{
-        email: '',
-        password: ''
+        username: "",
+        password: ""
       }
     }
   },
@@ -58,9 +58,9 @@ export default {
   methods:{
     login(){
       this.authenticationService = new Authentication();
-      console.log(this.form)
-      this.authenticationService.logInUser(this.form).then(() =>{
-        console.log("hola")
+      console.log(JSON.stringify(this.form))
+      this.authenticationService.logInUser("string").then(() =>{
+        console.log("gdsgsd")
       })
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="signUp">
     <div style="width: 100%; margin: 20px 0; position: fixed">
       <div style="justify-content: center; align-items: center; display: flex">
         <router-link to="/sign-in" style="text-decoration: none; margin: 0 15px;">
