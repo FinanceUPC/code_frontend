@@ -1,8 +1,8 @@
 import {createRouter, createWebHistory} from "vue-router";
-import sign_in from "@/components/security/sign_in";
-import sign_up from "@/components/security/sign_up";
-import home from "@/components/MainView/home";
-import conversion_rate from "@/components/MainView/Conversion_rate";
+import sign_in from "@/views/security/sign_in";
+import sign_up from "@/views/security/sign_up";
+import home from "@/views/home";
+import conversion_rate from "@/views/Conversion_rate";
 
 const router = createRouter({
     history: createWebHistory(),
