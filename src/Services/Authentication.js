@@ -8,4 +8,7 @@ export class Authentication{
     logInUser(data){
         return http.post("/users/sign-in", data)
     }
+    signUpUser(data){
+        return http.post("/users/sign-up", data)
+    }
 }
