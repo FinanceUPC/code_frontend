@@ -4,78 +4,373 @@
       Featured
     </div>
     <div class="card-body">
-
       <form class="text-center">
 
         <div class="form-group col align-self-center">
-          <label for="inputState">Tipo de Conversión</label>
-          <select id="inputState" class="form-control">
+          <label>Tipo de Conversión</label>
+          <select @change="this.changeConversion" id="inputState" class="form-control">
             <option selected>Choose...</option>
-            <option>...</option>
+            <option>Nominal a Nominal</option>
+            <option>Nominal a Efectiva</option>
+            <option>Efectiva a Efectiva</option>
+            <option>Efectiva a Nominal</option>
+            <button type="button" class="btn btn-primary btn-lg" @click="this.Result">SHOW</button>
           </select>
         </div>
-        <h3 class="card-title">De tasa Nominal a Tasa Efectiva</h3>
-
-        <div class="form-row col align-self-center">
-          <div class="form-group col">
-            <label for="inputState">Dias del año</label>
-            <select id="inputState" class="form-control">
-              <option selected>Choose...</option>
-              <option>...</option>
-            </select>
+        <div v-if="typeConversion == 'Nominal a Nominal'">
+          <h3 class="card-title">De tasa Nominal a Tasa Nominal</h3>
+          <div class="form-row col align-self-center">
+            <div class="form-group col">
+              <label>Plazo de Tasa Nominal</label>
+              <select id="PNN" class="form-control">
+                <option>Diario</option>
+                <option>Quincenal</option>
+                <option>Mensual</option>
+                <option>Bimestral</option>
+                <option>Trimestral</option>
+                <option>Cuatrimestral</option>
+                <option>Semestral</option>
+                <option selected>Anual</option>
+                <option>Especial</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputCity">Tasa nominal</label>
+              <input v-model="TN" type="text" class="form-control">
+            </div>
           </div>
+          <div class="form-row">
+            <div class="form-group col-md-5">
+              <label>Periodo de capitalización</label>
+              <select id="PCNN" class="form-control">
+                <option>Diario</option>
+                <option>Quincenal</option>
+                <option>Mensual</option>
+                <option>Bimestral</option>
+                <option>Trimestral</option>
+                <option>Cuatrimestral</option>
+                <option>Semestral</option>
+                <option>Anual</option>
+                <option>Especial</option>
+              </select>
+            </div>
+            <div class="form-group col-md-5">
+              <label>Taza Nominal Requerida</label>
+              <select id="TRNN" class="form-control">
+                <option>Diario</option>
+                <option>Quincenal</option>
+                <option>Mensual</option>
+                <option>Bimestral</option>
+                <option>Trimestral</option>
+                <option>Cuatrimestral</option>
+                <option>Semestral</option>
+                <option>Anual</option>
+                <option>Especial</option>
+              </select>
+            </div>
 
-          <div class="form-group col">
-            <label for="inputState">Termino de tasa nominal</label>
-            <select id="inputState" class="form-control">
-              <option selected>Choose...</option>
-              <option>...</option>
-            </select>
           </div>
-        </div>
-
-        <div class="form-row">
           <div class="form-group col-md-6">
-            <label for="inputCity">Tasa nominal</label>
-            <input type="text" class="form-control" id="inputCity">
-          </div>
-
-          <div class="form-group col-md-4">
-            <label for="inputState">Periodo compuesto</label>
-            <select id="inputState" class="form-control">
+            <label>Periodo de Capitalización</label>
+            <select id="PCRNN" class="form-control">
               <option selected>Choose...</option>
-              <option>...</option>
+              <option>Diario</option>
+              <option>Quicenal</option>
+              <option>Mensual</option>
+              <option>Bimestral</option>
+              <option>Trimestral</option>
+              <option>Cuatrimestral</option>
+              <option>Semestral</option>
+              <option selected>Anual</option>
+              <option>Especial</option>
             </select>
           </div>
         </div>
-
-        <div class="form-group col-md-4">
-          <label for="inputState">Tasa efectiva requerida</label>
-          <select id="inputState" class="form-control">
-            <option selected>Choose...</option>
-            <option>...</option>
-          </select>
+        <div v-if="typeConversion == 'Nominal a Efectiva' ">
+          <h3 class="card-title">De tasa Nominal a Tasa Efectiva</h3>
+          <div class="form-row col align-self-center">
+            <div class="form-group col">
+              <label>Dias del año</label>
+              <select id="DANE" class="form-control">
+                <option>360</option>
+                <option>365</option>
+              </select>
+            </div>
+            <div class="form-group col">
+              <label>Plazo de Tasa Nominal</label>
+              <select id="PNE" class="form-control">
+                <option>Diario</option>
+                <option>Quincenal</option>
+                <option>Mensual</option>
+                <option>Bimestral</option>
+                <option>Trimestral</option>
+                <option>Cuatrimestral</option>
+                <option>Semestral</option>
+                <option selected>Anual</option>
+                <option>Especial</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputCity">Tasa nominal</label>
+              <input v-model="TN" type="text" class="form-control">
+            </div>
+            <div class="form-group col-md-5">
+              <label>Periodo de capitalización</label>
+              <select id="PCNE" class="form-control">
+                <option>Diario</option>
+                <option>Quincenal</option>
+                <option>Mensual</option>
+                <option>Bimestral</option>
+                <option>Trimestral</option>
+                <option>Cuatrimestral</option>
+                <option>Semestral</option>
+                <option>Anual</option>
+                <option>Especial</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label>Tasa efectiva requerida</label>
+            <select id="TRNE" class="form-control">
+              <option selected>Choose...</option>
+              <option>Diario</option>
+              <option>Quincenal</option>
+              <option>Mensual</option>
+              <option>Bimestral</option>
+              <option>Trimestral</option>
+              <option>Cuatrimestral</option>
+              <option>Semestral</option>
+              <option selected>Anual</option>
+              <option>Especial</option>
+            </select>
+          </div>
         </div>
-
-        <button type="button" class="btn btn-primary btn-lg">SHOW</button>
+        <div v-if="typeConversion == 'Efectiva a Efectiva'">
+          <h3 class="card-title">De tasa Efectiva a Tasa Efectiva</h3>
+          <div class="form-row col align-self-center">
+            <div class="form-group col">
+              <label>Plazo de Tasa Efectiva</label>
+              <select id="PEE" class="form-control">
+                <option>Diario</option>
+                <option>Quincenal</option>
+                <option>Mensual</option>
+                <option>Bimestral</option>
+                <option>Trimestral</option>
+                <option>Cuatrimestral</option>
+                <option>Semestral</option>
+                <option selected>Anual</option>
+                <option>Especial</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Tasa Efectiva</label>
+              <input v-model="TE" type="text" class="form-control">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label>Taza Efectiva Requerida</label>
+              <select id="TREE" class="form-control">
+                <option>Diario</option>
+                <option>Quincenal</option>
+                <option>Mensual</option>
+                <option>Bimestral</option>
+                <option>Trimestral</option>
+                <option>Cuatrimestral</option>
+                <option>Semestral</option>
+                <option selected>Anual</option>
+                <option>Especial</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div v-if="typeConversion == 'Efectiva a Nominal'">
+          <h3 class="card-title">De tasa Efectiva a Tasa Nominal</h3>
+          <div class="form-row col align-self-center">
+            <div class="form-group col">
+              <label>Plazo de Tasa Efectiva</label>
+              <select id="PEN" class="form-control">
+                <option>Diario</option>
+                <option>Quincenal</option>
+                <option>Mensual</option>
+                <option>Bimestral</option>
+                <option>Trimestral</option>
+                <option>Cuatrimestral</option>
+                <option>Semestral</option>
+                <option selected>Anual</option>
+                <option>Especial</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputCity">Tasa Efectiva</label>
+              <input v-model="TE" type="text" class="form-control">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-5">
+              <label>Taza Nominal Requerida</label>
+              <select id="TREN" class="form-control">
+                <option>Diario</option>
+                <option>Quincenal</option>
+                <option>Mensual</option>
+                <option>Bimestral</option>
+                <option>Trimestral</option>
+                <option>Cuatrimestral</option>
+                <option>Semestral</option>
+                <option>Anual</option>
+                <option>Especial</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label >Periodo de Capitalización</label>
+              <select id="PCEN" class="form-control">
+                <option selected>Choose...</option>
+                <option>Diario</option>
+                <option>Quincenal</option>
+                <option>Mensual</option>
+                <option>Bimestral</option>
+                <option>Trimestral</option>
+                <option>Cuatrimestral</option>
+                <option>Semestral</option>
+                <option selected>Anual</option>
+                <option>Especial</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary btn-lg" @click="this.Result">SHOW</button>
         <button type="button" class="btn btn-secondary btn-lg">NEW</button>
         <router-link to="/home">
           <button type="button" class="btn btn-secondary btn-lg">EXIT</button>
         </router-link>
         <div class="form-group col-md-6">
           <label for="inputCity">Resultados</label>
-          <input type="text" class="form-control" id="inputCity">
+          <h1>{{this.R.toFixed(3)}} %</h1>
         </div>
 
       </form>
-
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Conversion_rate"
+  name: "Conversion_rate",
+  data(){
+    return{
+      typeConversion: " ",
+      DA: 0,
+      P: 0,
+      TN: 0,
+      PC: 0,
+      TR: 0,
+      m: 0,
+      n: 0,
+      R: 0,
+      TEP: 0,
+      PCR: 0,
+      TE:0,
+      times: ["Diario", "Quincenal", "Mensual", "Bimestral", "Trimestral", "Cuatrimestral", "Semetral", "Anual"],
+    }
+  },
+  created() {
+
+  },
+  methods:{
+    changeConversion(){
+      this.typeConversion = document.getElementById('inputState').value;
+    },
+    assignValues(time){
+      let value;
+      for(let i = 0; i < this.times.length; i++){
+        if(time == "Diario")
+          value = 1;
+        if(time == "Quincenal")
+          value = 15;
+        if(time == "Mensual")
+          value = 30;
+        if(time == "Bimestral")
+          value = 60;
+        if(time  == "Trimestral")
+          value = 90;
+        if(time == "Cuatrimestral")
+          value = 120;
+        if(time == "Semestral")
+          value = 180;
+        if(time == "Anual")
+          value = 360
+      }
+      return value;
+    },
+    nominalNominal(){
+      this.P = this.assignValues(document.getElementById('PNN').value);
+      this.PC = this.assignValues(document.getElementById('PCNN').value);
+      this.TR = this.assignValues(document.getElementById('TRNN').value);
+      this.PCR = this.assignValues(document.getElementById('PCRNN').value);
+      this.m = this.P / this.PC;
+      this.n = this.TR / this.PC;
+
+      this.TN = this.TN/100;
+      this.TEP = Math.pow(1+(this.TN/this.m), this.n) - 1
+
+      this.m = this.TR / this.PCR;
+      this.n = this.TR / this.PCR;
+
+      this.R = this.m*((Math.pow(1+this.TEP, 1/this.n)) - 1)*100
+    },
+    nominalEfectiva(){
+      this.DA = document.getElementById('DANE').value;
+      this.P = this.assignValues(document.getElementById('PNE').value);
+      this.PC = this.assignValues(document.getElementById('TNEN').value);
+      this.TR = this.assignValues(document.getElementById('TRNE').value);
+
+      this.n = this.TR / this.PC;
+      this.m = this.P / this.PC;
+
+      this.TN = this.TN/100;
+      this.R = (Math.pow(1+(this.TN/this.m), this.n) - 1) * 100
+    },
+    efectivaEfectiva(){
+      this.P = this.assignValues(document.getElementById('PEE').value);
+      this.TR = this.assignValues(document.getElementById('TREE').value);
+
+      this.TE = this.TE/100;
+      this.R = (Math.pow(1 + this.TE, (this.TR/this.P)) - 1) * 100
+    },
+    efectivaNominal(){
+      this.P = this.assignValues(document.getElementById('PEN').value);
+      this.PC = this.assignValues(document.getElementById('PCEN').value);
+      this.TR = this.assignValues(document.getElementById('TREN').value);
+
+      this.m = this.TR / this.PC;
+      this.n = this.P / this.PC;
+
+      console.log(this.P)
+      console.log(this.PC)
+      console.log(this.TR)
+
+      this.TE = this.TE/100;
+      this.R = this.m*((Math.pow(1+this.TE, 1/this.n)) - 1)*100
+    },
+    Result(){
+      switch (this.typeConversion) {
+        case 'Nominal a Nominal':
+          this.nominalNominal();
+          break;
+        case 'Nominal a Efectiva':
+          this.nominalEfectiva();
+          break;
+        case 'Efectiva a Efectiva':
+          this.efectivaEfectiva();
+          break;
+        case 'Efectiva a Nominal':
+          this.efectivaNominal();
+          break;
+      }
+    }
+  }
 }
 </script>
 

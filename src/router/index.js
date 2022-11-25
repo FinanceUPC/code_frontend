@@ -3,6 +3,7 @@ import sign_in from "@/views/security/sign_in.vue";
 import sign_up from "@/views/security/sign_up.vue";
 import home from "@/views/home.vue";
 import conversion_rate from "@/views/Conversion_rate.vue";
+import conversion_time from "@/views/conversion_time";
 
 const routes = [
     {
@@ -27,6 +28,10 @@ const routes = [
         path: "/conversionRate",
         name: "conversionRate",
         component: conversion_rate
+    },{
+        path: "/conversionTime",
+        name: "conversionTime",
+        component: conversion_time
     }
 ]
 
